@@ -24,7 +24,12 @@ const patientSchema = new mongoose.Schema({
 
     verified: {
         type: Boolean,
-        default: false
+        default: false,
+    },
+     
+    verificationCodeValidation:{
+        type: String,
+        select: true,
     },
     isAdmin: Boolean,
 },{

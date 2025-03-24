@@ -1,9 +1,12 @@
+const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const AppointmentSchema = new mongoose.Schema({
-    patientName: { type: String, required: true },
+    patientId: { type: mongoose.Schema.Types.ObjectId, ref: "Patient", required: true},
     doctorId: { type: mongoose.Schema.Types.ObjectId, ref: "Doctor", required: true },
-    dateTime: { type: Date, required: true }
+    appointmentDate: { type: Date, required: true },
+    phone: { type : Number, required: true},
+    
 });
 
 const Appointment = mongoose.model("Appointment", AppointmentSchema);

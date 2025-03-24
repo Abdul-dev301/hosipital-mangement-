@@ -5,15 +5,15 @@ const {Doctor} = require('../model/Doctors.js')
 
 /// ✅ Create an appointment
 router.post("/", async (req, res) => {
-    const { patientName, doctorId, dateTime } = req.body;
+    const { patientId, doctorId, appointmentDate, phone } = req.body;
 
     try {
         // Check if doctor exists
-        const doctor = await Doctor.findById(doctorId);
+        const doctor = await Doctor.findById(patientId);
         if (!doctor) return res.status(404).json({ error: "Doctor not found" });
 
         // Create appointment
-        const appointment = new Appointment({ patientName, doctorId, dateTime });
+        const appointment = new Appointment({ patientId, doctorId, appointmentDate, phone});
         await appointment.save();
 
         // Send a success response
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
 // ✅ Get all appointments
 router.get("/", async (req, res) => {
     try {
-        const appointments = await Appointment.find().populate("doctorId", "name specialization");
+        const appointments = await Appointment.find().populate("pateintId", "name specialization");
         res.json(appointments);
     } catch (err) {
         res.status(500).json({ error: "Error fetching appointments" });
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
 // ✅ Get an appointment by ID
 router.get("/:id", async (req, res) => {
     try {
-        const appointment = await Appointment.findById(req.params.id).populate("doctorId", "name specialization");
+        const appointment = await Appointment.findById(req.params.id).populate("pateintId","name specialization");
         if (!appointment) return res.status(404).json({ error: "Appointment not found" });
         res.json(appointment);
     } catch (err) {

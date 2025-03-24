@@ -1,5 +1,5 @@
+// Dependenceies 
 const express = require('express');
-const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
 const {Doctor, validateDoctor}= require('../model/Doctors.js')
@@ -52,7 +52,7 @@ router.get('/:id', async (req, res) => {
 // UPDATE DOCTOR BY ID
 router.put('/:id', async (req, res) => {
     console.log('Received Request body:', req.body);
-
+    
     const validationResult = validateDoctor(req.body);
     if (validationResult.error) return res.status(400).send(validationResult.error.details[0].message);
 

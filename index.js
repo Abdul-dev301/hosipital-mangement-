@@ -13,7 +13,7 @@ const patient = require('./routes/patient.js')
 const auth = require('./Authentication/auth.js');
 const doctorRoute = require('./routes/Doctor.js')
 const appointmentRoute= require('./routes/Appointment.js');
-
+const helmet = require('./startup/prod.js') (app);
 if( !config.get('jwtPrivateKey')){
 console.error('FATAL ERROR: jwtPrivateKey is not defined.');
 process.exit(1);
@@ -35,7 +35,6 @@ mongoose.connect("mongodb://localhost/Hospital")
 .catch(err=>console.log('Not Connected to Database...', err));
 
   
-
   
   
   
